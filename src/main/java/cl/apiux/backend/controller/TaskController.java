@@ -1,4 +1,4 @@
-package cl.apiux.backend.service;
+package cl.apiux.backend.controller;
 
 import cl.apiux.backend.dto.NewTaskDTO;
 import cl.apiux.backend.dto.TaskDTO;
@@ -15,7 +15,7 @@ import java.util.List;
 @CrossOrigin
 @RestController
 @RequestMapping("api/v1/tasks")
-public class TaskService {
+public class TaskController {
 
     @Autowired
     TaskRepository taskRepository;
@@ -23,18 +23,17 @@ public class TaskService {
     TaskMapper taskMapper;
 
     @GetMapping
-    public ResponseEntity<List<TaskDTO>> getAll(){
+    public ResponseEntity<List<TaskDTO>> getAll() {
         try {
             List<Task> tasks = taskRepository.findAll();
             return ResponseEntity.ok(taskMapper.generateTaskDTOS(tasks));
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<TaskDTO> findById(@PathVariable Long id){
+    public ResponseEntity<TaskDTO> findById(@PathVariable Long id) {
         try {
             Task task = taskRepository.findById(id).get();
             return ResponseEntity.ok(taskMapper.toTaskDTO(task));
@@ -76,7 +75,6 @@ public class TaskService {
             return ResponseEntity.badRequest().build();
         }
     }
-
 
 
 }

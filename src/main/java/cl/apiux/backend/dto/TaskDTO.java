@@ -1,6 +1,5 @@
 package cl.apiux.backend.dto;
 
-import lombok.Builder;
 import lombok.Data;
 
 import java.time.ZonedDateTime;
